@@ -1,0 +1,31 @@
+{% extends "hotel/base.html" %}
+
+{% block title %}Gestão de Quartos{% endblock %}
+
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Gestão de Quartos</h1>
+    <a href="{% url 'hotel:quarto_create' %}" class="btn btn-primary">Adicionar Novo Quarto</a>
+  </div>
+
+  <ul class="list-group">
+    {% for quarto in quartos %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>Quarto Nº {{ quarto.numero }}</strong> ({{ quarto.get_tipo_display }}) - 
+          {% if quarto.disponivel %}
+            <span class="badge bg-success">Disponível</span>
+          {% else %}
+            <span class="badge bg-danger">Indisponível</span>
+          {% endif %}
+        </div>
+        <div>
+          <a href="{% url 'hotel:quarto_update' quarto.pk %}" class="btn btn-sm btn-secondary">Editar</a>
+          <a href="{% url 'hotel:quarto_delete' quarto.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+        </div>
+      </li>
+    {% empty %}
+      <li class="list-group-item">Nenhum quarto cadastrado.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

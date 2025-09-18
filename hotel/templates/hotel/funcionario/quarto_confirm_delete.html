@@ -1,0 +1,15 @@
+{% extends "hotel/base.html" %}
+
+{% block title %}Confirmar Exclusão{% endblock %}
+
+{% block content %}
+  <h1>Confirmar Exclusão</h1>
+  <p class="lead">Você tem certeza que deseja excluir o <strong>{{ quarto }}</strong>?</p>
+  <p>Esta ação não pode ser desfeita.</p>
+  <hr>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sim, tenho certeza. Excluir.</button>
+    <a href="{% url 'hotel:quarto_list' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+{% endblock %}

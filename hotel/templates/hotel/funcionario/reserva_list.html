@@ -1,0 +1,34 @@
+{% extends "hotel/base.html" %}
+
+{% block title %}Todas as Reservas{% endblock %}
+
+{% block content %}
+  <h1>Todas as Reservas do Sistema</h1>
+  <hr>
+  <div class="list-group">
+    {% for reserva in reservas %}
+      <div class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ reserva.quarto }}</h5>
+          <small>Criada em: {{ reserva.data_criacao|date:"d/m/Y" }}</sall>
+        </div>
+        <p class="mb-1">
+          <strong>Hóspede:</strong> {{ reserva.hospede.get_full_name|default:reserva.hospede.username }}   
+
+          <strong>Período:</strong> {{ reserva.data_checkin|date:"d/m/Y" }} a {{ reserva.data_checkout|date:"d/m/Y" }}
+        </p>
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="badge 
+                {% if reserva.status == 'CONFIRMADO' %}bg-success
+                {% elif reserva.status == 'CANCELADO' %}bg-danger
+                {% else %}bg-secondary{% endif %}">
+                {{ reserva.get_status_display }}
+            </span>
+            <a href="{% url 'hotel:reserva_update_status' reserva.pk %}" class="btn btn-sm btn-outline-primary">Alterar Status</a>
+        </div>
+      </div>
+    {% empty %}
+      <p>Nenhuma reserva encontrada no sistema.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "hotel/base.html" %}
+
+{% block title %}Entrar{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title text-center">Entrar</h2>
+            </div>
+            <div class="card-body">
+                <form class="login" method="POST" action="{% url 'account_login' %}">
+                    {% csrf_token %}
+                    
+                    {{ form.as_p }}
+                    
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+                    
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="submit">Entrar</button>
+                    </div>
+                </form>
+                <div class="text-center mt-3">
+                    <a href="{% url 'account_reset_password' %}">Esqueceu a senha?</a>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <p>Ainda não tem uma conta? <a href="{% url 'account_signup' %}">Cadastre-se</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

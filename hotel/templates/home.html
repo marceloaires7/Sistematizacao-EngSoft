@@ -1,0 +1,23 @@
+{% extends "hotel/base.html" %}
+
+{% block title %}Bem-vindo!{% endblock %}
+
+{% block content %}
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Bem-vindo ao Sistema de Hotelaria</h1>
+        <p class="col-md-8 fs-4">Use a barra de navegação acima para gerenciar o sistema ou suas reservas.</p>
+        
+        {% if user.is_authenticated %}
+            {% if user.is_funcionario %}
+                <a class="btn btn-primary btn-lg" href="{% url 'hotel:quarto_list' %}">Gerenciar Quartos</a>
+            {% elif user.is_hospede %}
+                <a class="btn btn-primary btn-lg" href="#">Ver Minhas Reservas</a>
+            {% endif %}
+        {% else %}
+            <a class="btn btn-primary btn-lg" href="{% url 'account_login' %}">Entrar</a>
+            <a class="btn btn-secondary btn-lg" href="{% url 'account_signup' %}">Cadastrar-se</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

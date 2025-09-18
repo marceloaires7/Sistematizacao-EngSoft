@@ -1,0 +1,45 @@
+{% extends "hotel/base.html" %}
+
+{% block title %}Buscar Quartos Disponíveis{% endblock %}
+
+{% block content %}
+  <h1>Buscar Quartos Disponíveis</h1>
+  <p>Informe o período desejado para encontrar quartos vagos.</p>
+  <div class="card card-body bg-light mb-4">
+    <form method="get" class="row g-3 align-items-end">
+      <div class="col-md-5">
+        <label for="{{ form.data_checkin.id_for_label }}" class="form-label">{{ form.data_checkin.label }}</label>
+        {{ form.data_checkin }}
+      </div>
+      <div class="col-md-5">
+        <label for="{{ form.data_checkout.id_for_label }}" class="form-label">{{ form.data_checkout.label }}</label>
+        {{ form.data_checkout }}
+      </div>
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+      </div>
+    </form>
+  </div>
+
+  <hr>
+
+  <h2>Resultados da Busca</h2>
+  {% if request.GET.data_checkin %}
+    <ul class="list-group">
+      {% for quarto in quartos_disponiveis %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <strong>{{ quarto }}</strong>
+          </div>
+          <a href="{% url 'hotel:criar_reserva' quarto.id %}?checkin={{ request.GET.data_checkin }}&checkout={{ request.GET.data_checkout }}" class="btn btn-success">
+            Reservar Agora
+          </a>
+        </li>
+      {% empty %}
+        <li class="list-group-item">Nenhum quarto disponível para o período selecionado. Tente outras datas.</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Por favor, preencha as datas e clique em "Buscar" para ver os quartos disponíveis.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "hotel/base.html" %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+  <h1>{{ titulo }}</h1>
+  <hr>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }} <!-- Renderiza o formulário como parágrafos -->
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="{% url 'hotel:quarto_list' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "hotel/base.html" %}
+
+{% block title %}{{ titulo }}{% endblock %}
+
+{% block content %}
+  <h1>{{ titulo }}</h1>
+  <hr>
+  <div class="card">
+    <div class="card-body">
+      <p><strong>Hóspede:</strong> {{ reserva.hospede.username }}</p>
+      <p><strong>Quarto:</strong> {{ reserva.quarto }}</p>
+      <p><strong>Período:</strong> {{ reserva.data_checkin|date:"d/m/Y" }} a {{ reserva.data_checkout|date:"d/m/Y" }}</p>
+      <p><strong>Status Atual:</strong> {{ reserva.get_status_display }}</p>
+      
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Salvar Alteração</button>
+        <a href="{% url 'hotel:reserva_list_funcionario' %}" class="btn btn-secondary">Voltar</a>
+      </form>
+    </div>
+  </div>
+{% endblock %}

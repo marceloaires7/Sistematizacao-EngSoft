@@ -1,5 +1,5 @@
-import os
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-wueqi&4!_yq&+!x_sr$$($fb$e(dila$dy*qt-_5t23$bimn#z"
+SECRET_KEY = "django-insecure-bt^^^22s6(6ta!^j=pc^+hdje6=5_ix*6oi2-smrozx62s!5ul"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,7 +47,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "/hotel/templates")],
+        "DIRS": [os.path.join(BASE_DIR, "hotel/templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
